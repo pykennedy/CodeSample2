@@ -1,4 +1,4 @@
-package pyk.codesample2.contract;
+package pyk.codesample2.contract.adapter;
 
 import pyk.model.item.MovieItem;
 
