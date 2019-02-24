@@ -1,15 +1,24 @@
 package pyk.codesample2;
 
 import android.app.Application;
+import android.content.Context;
 
 public class App extends Application {
-  private static App instance = new App();
-  
-  public static App get() { return instance; }
+  private static Application app;
   
   @Override
   public void onCreate() {
     super.onCreate();
-    instance = this;
+    app = this;
   }
+  
+  private static Application getApplication() {
+    return app;
+  }
+  
+  public static Context getContext() {
+    return getApplication().getApplicationContext();
+  }
+  
+  
 }
