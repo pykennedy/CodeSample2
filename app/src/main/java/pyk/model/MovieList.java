@@ -9,18 +9,7 @@ public class MovieList {
   private static final MovieList       instance = new MovieList();
   private              List<MovieItem> movies;
   
-  private MovieList() {
-    movies = new ArrayList<>();
-    for (int i = 0; i < 200; i++) {
-      movies.add(new MovieItem(
-          "Movie #" + i
-          , null
-          , null
-          , 0
-          , null
-          , null));
-    }
-  }
+  private MovieList() { movies = new ArrayList<>(); }
   
   public List<MovieItem> getMovies() {
     return movies;

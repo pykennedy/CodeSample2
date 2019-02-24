@@ -9,17 +9,22 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import pyk.codesample2.R;
+import pyk.codesample2.contract.adapter.MovieListItemAdapterContract;
 import pyk.codesample2.presenter.adapter.MovieListItemAdapterPresenter;
 import pyk.model.item.MovieItem;
 
-public class MovieListItemAdapter extends BaseAdapter {
+public class MovieListItemAdapter extends BaseAdapter
+    implements MovieListItemAdapterContract.MovieListItemAdapterView {
   
   private MovieListItemAdapterPresenter presenter;
-  private Context context;
+  private Context                       context;
+  private int                           pageCount = 1;
+  private int                           maxPages  = 2;
   
   public MovieListItemAdapter(Context context) {
-    presenter = new MovieListItemAdapterPresenter();
+    presenter = new MovieListItemAdapterPresenter(this);
     this.context = context;
+    presenter.pullData(pageCount);
   }
   
   @Override public int getCount() {
@@ -37,18 +42,30 @@ public class MovieListItemAdapter extends BaseAdapter {
   @Override public View getView(int i, View view, ViewGroup viewGroup) {
     MovieItem movieItem = presenter.getMovie(i);
     
-    if(view == null) {
-      if(context == null) {
+    if (view == null) {
+      if (context == null) {
         Log.e("asdf", "null");
       }
       LayoutInflater layoutInflater = LayoutInflater.from(context);
       view = layoutInflater.inflate(R.layout.item_movie, null);
     }
-  
+    
     TextView title = view.findViewById(R.id.tv_title_movieItem);
     
     title.setText(movieItem.getTitle());
     
     return view;
+  }
+  
+  @Override public void triggerRefresh(int maxPages) {
+    pageCount++;
+    this.maxPages = maxPages;
+    notifyDataSetChanged();
+  }
+  
+  @Override public void requestNextPage() {
+    if(pageCount <= maxPages) {
+      presenter.pullData(pageCount);
+    }
   }
 }
