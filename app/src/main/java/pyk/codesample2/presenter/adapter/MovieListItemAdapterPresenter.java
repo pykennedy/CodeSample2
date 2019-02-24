@@ -27,10 +27,12 @@ public class MovieListItemAdapterPresenter
   }
   
   @Override public void pullData(int page) {
-    tmdbHelper.getMovies(0, new Callback() {
+    tmdbHelper.getMovies(page, new Callback() {
       @Override public void onResponse(String response, boolean succeeded) {
         if(succeeded) {
           processList(response);
+        } else {
+          mliav.onError(response);
         }
       }
     });
@@ -70,18 +72,20 @@ public class MovieListItemAdapterPresenter
   }
   
   @Override public MovieItem getMovie(int index) {
-    return MovieList.getInstance().getMovies().get(index);
+    return movieList.getMovies().get(index);
   }
   
   @Override public int getCount() {
-    return MovieList.getInstance().getCount();
+    return movieList.getCount();
   }
   
   /****************************************************************************************
    dependency injection for testing, no production code allowed beyond this point
    ***************************************************************************************/
   
-  public MovieListItemAdapterPresenter(TMDBHelper tmdbHelper) {
+  public MovieListItemAdapterPresenter(TMDBHelper tmdbHelper, MovieList movieList, MovieListItemAdapterContract.MovieListItemAdapterView mliav) {
     this.tmdbHelper = tmdbHelper;
+    this.movieList = movieList;
+    this.mliav = mliav;
   }
 }

@@ -16,8 +16,8 @@ public class TMDBHelper {
   public static TMDBHelper getInstance() { return instance; }
   
   public void getMovies(int page, final Callback callback) {
-    if (page == 0) {
-      volleyHelper.sendRequest("succeeded", new Callback() {
+    if (page <= 2) {
+      volleyHelper.sendRequest("page " + page, new Callback() {
         @Override public void onResponse(String response, boolean succeeded) {
           if (succeeded) {
             callback.onResponse(response, true);
