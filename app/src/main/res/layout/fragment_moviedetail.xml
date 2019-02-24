@@ -2,6 +2,66 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/iv_backdrop_movieDetail"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/mcBlack38"
+        app:layout_constraintDimensionRatio="1:.5625"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/iv_backdrop_movieDetail"/>
+
+    <TextView
+        android:id="@+id/tv_title_movieDetail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_backdrop_movieDetail"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        style="@style/DetailTitle"/>
+
+    <TextView
+        android:id="@+id/tv_genres_movieDetail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_movieDetail"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginTop="2dp"
+        style="@style/DetailGenre"/>
+
+    <TextView
+        android:id="@+id/tv_rating_movieDetail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_genres_movieDetail"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginTop="2dp"
+        style="@style/DetailRating"/>
+
+    <TextView
+        android:id="@+id/tv_overview_movieDetail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_rating_movieDetail"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        style="@style/DetailOverview"/>
 
 </android.support.constraint.ConstraintLayout>

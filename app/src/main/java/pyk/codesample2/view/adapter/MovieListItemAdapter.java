@@ -16,6 +16,7 @@ import pyk.codesample2.R;
 import pyk.codesample2.contract.adapter.MovieListItemAdapterContract;
 import pyk.codesample2.contract.callback.Listener;
 import pyk.codesample2.presenter.adapter.MovieListItemAdapterPresenter;
+import pyk.codesample2.view.activity.MainActivity;
 import pyk.model.item.MovieItem;
 
 public class MovieListItemAdapter extends BaseAdapter
@@ -25,12 +26,15 @@ public class MovieListItemAdapter extends BaseAdapter
   private Context                       context;
   private int                           pageCount = 1;
   private int                           maxPages  = 2;
-  private Listener.SwipyListener listener;
+  private Listener.SwipyListener        listener;
+  private MainActivity mainActivity;
   
-  public MovieListItemAdapter(Context context, Listener.SwipyListener listener) {
+  public MovieListItemAdapter(Context context, Listener.SwipyListener listener,
+                              MainActivity mainActivity) {
     presenter = new MovieListItemAdapterPresenter(this);
     this.context = context;
     this.listener = listener;
+    this.mainActivity = mainActivity;
     presenter.pullData(pageCount);
   }
   
@@ -58,12 +62,12 @@ public class MovieListItemAdapter extends BaseAdapter
     }
     
     ImageView poster = view.findViewById(R.id.iv_poster_movieItem);
-    TextView title = view.findViewById(R.id.tv_title_movieItem);
-    TextView rating = view.findViewById(R.id.tv_rating_movieItem);
+    TextView  title  = view.findViewById(R.id.tv_title_movieItem);
+    TextView  rating = view.findViewById(R.id.tv_rating_movieItem);
     
     title.setText(movieItem.getTitle());
     rating.setText(Double.toString(movieItem.getVote_average()));
-  
+    
     Glide.with(App.getContext()).load(
         "http://image.tmdb.org/t/p/w300/" + movieItem.getPoster_path()).into(poster);
     
@@ -78,7 +82,7 @@ public class MovieListItemAdapter extends BaseAdapter
   }
   
   @Override public void requestNextPage() {
-    if(pageCount <= maxPages) {
+    if (pageCount <= maxPages) {
       presenter.pullData(pageCount);
     }
   }
