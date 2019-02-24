@@ -15,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
   
   private ViewPager                 pager;
   private FragmentStatePagerAdapter pagerAdapter;
+  private MovieListFragment movieListFragment;
+  private MovieDetailFragment movieDetailFragment;
   
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,11 @@ public class MainActivity extends AppCompatActivity {
     });
   }
   
+  public void updateMovieDetailFragment(int i) {
+    movieDetailFragment.updateDetails(i);
+    pager.setCurrentItem(1);
+  }
+  
   private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
     
     ScreenSlidePagerAdapter(FragmentManager fm) {
@@ -46,11 +53,14 @@ public class MainActivity extends AppCompatActivity {
     public Fragment getItem(int position) {
       switch (position) {
         case 0:
-          return new MovieListFragment();
+          movieListFragment = new MovieListFragment();
+          return movieListFragment;
         case 1:
-          return new MovieDetailFragment();
+          movieDetailFragment = new MovieDetailFragment();
+          return movieDetailFragment;
         default:
-          return new MovieListFragment();
+          movieListFragment = new MovieListFragment();
+          return movieListFragment;
       }
     }
     

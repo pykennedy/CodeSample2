@@ -9,16 +9,18 @@ public class MovieItem {
   private double        vote_average;
   private String        overview;
   private String        poster_path;
+  private String        backdrop_path;
   private String        parsedGenres;
   
   public MovieItem(String title, String release_date, List<Integer> genre_ids, double vote_average,
-                   String overview, String poster_path) {
+                   String overview, String poster_path, String backdrop_path) {
     this.title = title;
     this.release_date = release_date;
     this.genre_ids = genre_ids;
     this.vote_average = vote_average;
     this.overview = overview;
     this.poster_path = poster_path;
+    this.backdrop_path = backdrop_path;
   }
   
   public String getTitle() {
@@ -44,6 +46,8 @@ public class MovieItem {
   public String getPoster_path() {
     return poster_path;
   }
+  
+  public String getBackdrop_path() { return backdrop_path; }
   
   public String getParsedGenres() {
     return parsedGenres;
