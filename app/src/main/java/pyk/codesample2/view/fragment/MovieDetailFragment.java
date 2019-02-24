@@ -12,12 +12,12 @@ import com.bumptech.glide.Glide;
 
 import pyk.codesample2.App;
 import pyk.codesample2.R;
-import pyk.model.MovieList;
+import pyk.codesample2.presenter.fragment.MovieDetailFragmentPresenter;
 import pyk.model.item.MovieItem;
 
 public class MovieDetailFragment extends Fragment {
   
-  private MovieList movieList;
+  private MovieDetailFragmentPresenter presenter;
   private ImageView backdrop;
   private TextView title;
   private TextView genres;
@@ -27,7 +27,7 @@ public class MovieDetailFragment extends Fragment {
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
-    movieList = MovieList.getInstance();
+    presenter = new MovieDetailFragmentPresenter();
     
     ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_moviedetail, container,
                                                       false);
@@ -41,7 +41,7 @@ public class MovieDetailFragment extends Fragment {
   }
   
   public void updateDetails(int i) {
-    MovieItem movieItem = movieList.getMovies().get(i);
+    MovieItem movieItem = presenter.getMovie(i);
     String releaseDate = null;
     
     if(movieItem.getRelease_date() != null) {

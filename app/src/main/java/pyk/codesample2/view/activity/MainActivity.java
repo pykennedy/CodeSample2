@@ -14,7 +14,6 @@ import pyk.codesample2.view.fragment.MovieListFragment;
 public class MainActivity extends AppCompatActivity {
   
   private ViewPager                 pager;
-  private FragmentStatePagerAdapter pagerAdapter;
   private MovieListFragment movieListFragment;
   private MovieDetailFragment movieDetailFragment;
   
@@ -24,7 +23,8 @@ public class MainActivity extends AppCompatActivity {
     setContentView(R.layout.activity_main);
   
     pager = findViewById(R.id.vp_mainActivity);
-    pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
+    FragmentStatePagerAdapter pagerAdapter = new ScreenSlidePagerAdapter(
+        getSupportFragmentManager());
     pager.setAdapter(pagerAdapter);
     pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
       @Override
@@ -36,9 +36,11 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onPageScrollStateChanged(int state) {}
     });
+    // TODO: prevent swipes until after a movie is loaded for the first time.
   }
   
   public void updateMovieDetailFragment(int i) {
+    // update the details fragment before changing pages
     movieDetailFragment.updateDetails(i);
     pager.setCurrentItem(1);
   }
@@ -71,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
   }
   
   @Override public void onBackPressed() {
+    // add first page to backstack for good UX
     if (pager.getCurrentItem() == 1) {
       pager.setCurrentItem(0);
     } else {

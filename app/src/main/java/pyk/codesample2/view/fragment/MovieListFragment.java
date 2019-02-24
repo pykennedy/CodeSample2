@@ -29,8 +29,7 @@ public class MovieListFragment extends Fragment implements Listener.SwipyListene
                                                       false);
     GridView gridView = rootView.findViewById(
         R.id.gv_list_fragmentMovieList);
-    final MovieListItemAdapter movieListItemAdapter = new MovieListItemAdapter(getActivity(), this,
-                                                                               (MainActivity) getActivity());
+    final MovieListItemAdapter movieListItemAdapter = new MovieListItemAdapter(getActivity(), this);
     gridView.setAdapter(movieListItemAdapter);
     
     gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

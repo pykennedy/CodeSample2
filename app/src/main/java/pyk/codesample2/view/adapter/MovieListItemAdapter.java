@@ -1,7 +1,6 @@
 package pyk.codesample2.view.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import pyk.codesample2.R;
 import pyk.codesample2.contract.adapter.MovieListItemAdapterContract;
 import pyk.codesample2.contract.callback.Listener;
 import pyk.codesample2.presenter.adapter.MovieListItemAdapterPresenter;
-import pyk.codesample2.view.activity.MainActivity;
 import pyk.model.item.MovieItem;
 
 public class MovieListItemAdapter extends BaseAdapter
@@ -27,14 +25,12 @@ public class MovieListItemAdapter extends BaseAdapter
   private int                           pageCount = 1;
   private int                           maxPages  = 2;
   private Listener.SwipyListener        listener;
-  private MainActivity mainActivity;
   
-  public MovieListItemAdapter(Context context, Listener.SwipyListener listener,
-                              MainActivity mainActivity) {
+  public MovieListItemAdapter(Context context, Listener.SwipyListener listener) {
     presenter = new MovieListItemAdapterPresenter(this);
     this.context = context;
     this.listener = listener;
-    this.mainActivity = mainActivity;
+    // begin pulling movies immediately
     presenter.pullData(pageCount);
   }
   
@@ -54,9 +50,6 @@ public class MovieListItemAdapter extends BaseAdapter
     MovieItem movieItem = presenter.getMovie(i);
     
     if (view == null) {
-      if (context == null) {
-        Log.e("asdf", "null");
-      }
       LayoutInflater layoutInflater = LayoutInflater.from(context);
       view = layoutInflater.inflate(R.layout.item_movie, null);
     }
@@ -75,13 +68,16 @@ public class MovieListItemAdapter extends BaseAdapter
   }
   
   @Override public void triggerRefresh(int maxPages) {
+    // increment page count only on success
     pageCount++;
+    // should the max page count change mid session
     this.maxPages = maxPages;
     notifyDataSetChanged();
     listener.listPopulate();
   }
   
   @Override public void requestNextPage() {
+    // avoid network calls by not even attempting to pull data if at max pages
     if (pageCount <= maxPages) {
       presenter.pullData(pageCount);
     }
