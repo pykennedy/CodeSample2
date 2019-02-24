@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CodeSample2</string>
+    <string name="iv_poster_movieItem">Movie Poster</string>
 </resources>

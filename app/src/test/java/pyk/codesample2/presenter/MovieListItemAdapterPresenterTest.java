@@ -77,10 +77,17 @@ public class MovieListItemAdapterPresenterTest {
   }
   
   @Test
-  public void pullData_CallbackFailed() {
+  public void pullData_CallbackFailed_Error() {
+    mliap.pullData(4);
+    verify(tmdbHelper).getMovies(eq(4), captor.capture());
+    captor.getValue().onResponse("failed", false);
+  }
+  
+  @Test
+  public void pullData_CallbackFailed_EndOfPages() {
     mliap.pullData(3);
     verify(tmdbHelper).getMovies(eq(3), captor.capture());
-    captor.getValue().onResponse("failed", false);
+    captor.getValue().onResponse("No More Movies to Pull!", false);
   }
   
   @Test
