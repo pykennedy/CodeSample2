@@ -6,6 +6,7 @@ public class MovieListItemAdapterContract {
   public interface MovieListItemAdapterView {
     void triggerRefresh(int maxPages);
     void requestNextPage();
+    void onError(String error);
   }
   
   public interface MovieListItemAdapterPresenter {

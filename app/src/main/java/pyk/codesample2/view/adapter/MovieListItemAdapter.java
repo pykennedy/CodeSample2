@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import pyk.codesample2.R;
 import pyk.codesample2.contract.adapter.MovieListItemAdapterContract;
+import pyk.codesample2.contract.callback.Listener;
 import pyk.codesample2.presenter.adapter.MovieListItemAdapterPresenter;
 import pyk.model.item.MovieItem;
 
@@ -20,10 +21,12 @@ public class MovieListItemAdapter extends BaseAdapter
   private Context                       context;
   private int                           pageCount = 1;
   private int                           maxPages  = 2;
+  private Listener.SwipyListener listener;
   
-  public MovieListItemAdapter(Context context) {
+  public MovieListItemAdapter(Context context, Listener.SwipyListener listener) {
     presenter = new MovieListItemAdapterPresenter(this);
     this.context = context;
+    this.listener = listener;
     presenter.pullData(pageCount);
   }
   
@@ -61,11 +64,16 @@ public class MovieListItemAdapter extends BaseAdapter
     pageCount++;
     this.maxPages = maxPages;
     notifyDataSetChanged();
+    listener.listPopulate();
   }
   
   @Override public void requestNextPage() {
     if(pageCount <= maxPages) {
       presenter.pullData(pageCount);
     }
+  }
+  
+  @Override public void onError(String error) {
+    listener.networkError(error);
   }
 }

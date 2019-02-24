@@ -11,8 +11,10 @@ public class VolleyHelper {
   void sendRequest(String url, Callback callback) {
     if(url.equals("failed")) {
       callback.onResponse("failed", false);
-    } else {
+    } else if(url.equals("page 1")){
       callback.onResponse(StaticValues.volleyResponse, true);
+    } else if(url.equals("page 2")) {
+      callback.onResponse(StaticValues.volleyResponse2, true);
     }
   }
 }

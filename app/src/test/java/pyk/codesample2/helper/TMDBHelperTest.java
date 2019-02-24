@@ -30,30 +30,30 @@ public class TMDBHelperTest {
   
   @Test
   public void getMovies_CallsVolley() {
-    tmdbHelper.getMovies(0, new Callback() {
+    tmdbHelper.getMovies(1, new Callback() {
       @Override public void onResponse(String response, boolean succeeded) {
         // do nothing
       }
     });
-    verify(volleyHelper).sendRequest(eq("succeeded"), captor.capture());
+    verify(volleyHelper).sendRequest(eq("page 1"), captor.capture());
   }
   
   @Test
   public void getMovies_CallbackSucceeded() {
     // page 0 = force a success
-    tmdbHelper.getMovies(0, new Callback() {
+    tmdbHelper.getMovies(1, new Callback() {
       @Override public void onResponse(String response, boolean succeeded) {
         // do nothing
       }
     });
-    verify(volleyHelper).sendRequest(eq("succeeded"), captor.capture());
+    verify(volleyHelper).sendRequest(eq("page 1"), captor.capture());
     captor.getValue().onResponse(StaticValues.volleyResponse, true);
   }
   
   @Test
   public void getMovies_CallbackFailed() {
     // page 1 = force a failure
-    tmdbHelper.getMovies(1, new Callback() {
+    tmdbHelper.getMovies(3, new Callback() {
       @Override public void onResponse(String response, boolean succeeded) {
         // do nothing
       }
