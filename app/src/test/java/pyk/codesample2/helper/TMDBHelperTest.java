@@ -8,6 +8,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import pyk.codesample2.contract.callback.Callback;
+import pyk.codesample2.support.StaticValues;
 
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
@@ -46,7 +47,7 @@ public class TMDBHelperTest {
       }
     });
     verify(volleyHelper).sendRequest(eq("succeeded"), captor.capture());
-    captor.getValue().onResponse("succeeded", true);
+    captor.getValue().onResponse(StaticValues.volleyResponse, true);
   }
   
   @Test
