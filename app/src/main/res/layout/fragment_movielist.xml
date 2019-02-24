@@ -23,11 +23,11 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:gravity="center"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:verticalSpacing="24dp"
                 android:columnWidth="150dp"
                 android:numColumns="auto_fit"
-                android:verticalSpacing="24dp"
-                android:horizontalSpacing="10dp"
                 android:stretchMode="spacingWidthUniform"
                 android:layout_centerInParent="true"/>
 

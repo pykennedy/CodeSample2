@@ -6,8 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
+import pyk.codesample2.App;
 import pyk.codesample2.R;
 import pyk.codesample2.contract.adapter.MovieListItemAdapterContract;
 import pyk.codesample2.contract.callback.Listener;
@@ -53,9 +57,15 @@ public class MovieListItemAdapter extends BaseAdapter
       view = layoutInflater.inflate(R.layout.item_movie, null);
     }
     
+    ImageView poster = view.findViewById(R.id.iv_poster_movieItem);
     TextView title = view.findViewById(R.id.tv_title_movieItem);
+    TextView rating = view.findViewById(R.id.tv_rating_movieItem);
     
     title.setText(movieItem.getTitle());
+    rating.setText(Double.toString(movieItem.getVote_average()));
+  
+    Glide.with(App.getContext()).load(
+        "http://image.tmdb.org/t/p/w300/" + movieItem.getPoster_path()).into(poster);
     
     return view;
   }

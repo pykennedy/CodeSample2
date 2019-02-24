@@ -27,7 +27,10 @@ public class TMDBHelper {
           }
         }
       });
-    } else {
+    } else if (page == 3) {
+      callback.onResponse("No More Movies to Pull!", false);
+    }
+    else {
       volleyHelper.sendRequest("failed", new Callback() {
         @Override public void onResponse(String response, boolean succeeded) {
           if (succeeded) {

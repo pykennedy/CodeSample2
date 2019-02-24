@@ -40,7 +40,7 @@ public class TMDBHelperTest {
   
   @Test
   public void getMovies_CallbackSucceeded() {
-    // page 0 = force a success
+    // page 1 = force a success
     tmdbHelper.getMovies(1, new Callback() {
       @Override public void onResponse(String response, boolean succeeded) {
         // do nothing
@@ -52,8 +52,8 @@ public class TMDBHelperTest {
   
   @Test
   public void getMovies_CallbackFailed() {
-    // page 1 = force a failure
-    tmdbHelper.getMovies(3, new Callback() {
+    // page 4+ = force a failure
+    tmdbHelper.getMovies(4, new Callback() {
       @Override public void onResponse(String response, boolean succeeded) {
         // do nothing
       }
